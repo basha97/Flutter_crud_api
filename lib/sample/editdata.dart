@@ -33,7 +33,7 @@ class _EditDataState extends State<EditData> {
       "password":cpassword.text
 
     });
-
+    
   }
     @override
     void initState(){

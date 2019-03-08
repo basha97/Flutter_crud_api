@@ -45,7 +45,7 @@ class HomeState extends State<Home>{
     Widget build(BuildContext context) {
         return  Scaffold(
         appBar:  AppBar(
-            title:  Text("My Store"),
+            title:  Text("Cloudelabs"),
         ),
         floatingActionButton:  FloatingActionButton(
             onPressed: ()=>Navigator.of(context).push(
@@ -64,7 +64,10 @@ class HomeState extends State<Home>{
                             return Text('Press button to start.');
                             case ConnectionState.active:
                             case ConnectionState.waiting:
-                            return Text('Awaiting result...');
+                            // return Text('Awaiting result...');
+							return Center(
+								child: CircularProgressIndicator(),
+							);
                             case ConnectionState.done:
                             if (snapshot.hasError)
                             return Text('Error: ${snapshot.error}');
@@ -85,22 +88,38 @@ class ItemList extends StatelessWidget{
 
     @override
     Widget build(BuildContext context) {
-        return  ListView.builder(
+		
+        return  ListView.separated(
+			separatorBuilder: (BuildContext context, int i) => Divider(
+				color: Colors.grey,
+			),
             itemCount: list.length,
             itemBuilder: (context,i){
+				// if (i.isEven) return Divider();
             return  ListTile(
-                title:  Text(
-            list[i]['name']
-            ),
-                leading:  Icon(Icons.add),
-                onTap:()=> Navigator.of(context).push(
-                MaterialPageRoute(
-                    builder: (BuildContext context)=> Details(list: list,index: i),
+						contentPadding: EdgeInsets.all(15.0),
+                		title:  Text(
+            						list[i]['name'],
+									style: TextStyle(
+										fontSize: 25,
+										color: Colors.cyan
+									),
+									
+            					),
+								
+                		leading:  CircleAvatar(
+							backgroundImage: new NetworkImage('https://cdn3.vectorstock.com/i/1000x1000/30/97/flat-business-man-user-profile-avatar-icon-vector-4333097.jpg'),
+						),
+                		onTap:()=> Navigator.of(context).push(
+							MaterialPageRoute(
+								builder: (BuildContext context)=> Details(list: list,index: i),
 
-                )
-                ),
-            );
-        },
+							)
+                		),
+						
+            		);
+        	},
         );
+		
     }
 }
