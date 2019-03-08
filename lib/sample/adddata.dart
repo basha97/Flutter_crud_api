@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'dart:async';
 class AddData extends StatefulWidget {
   @override
   _AddDataState createState() => _AddDataState();

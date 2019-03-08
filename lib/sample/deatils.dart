@@ -67,19 +67,19 @@ class _DetailsState extends State<Details> {
           child: new Column(
             children: <Widget>[
               new Text(
-                widget.list[widget.index]['title'],
+                widget.list[widget.index]['username'],
+                style: new TextStyle(fontSize: 20.0),
+              ),
+              new Text(
+                widget.list[widget.index]['email'],
                 style: new TextStyle(fontSize: 20.0),
               ),
               // new Text(
-              //   widget.list[widget.index]['body'],
+              //   widget.list[widget.index]['number'],
               //   style: new TextStyle(fontSize: 20.0),
               // ),
               // new Text(
-              //   widget.list[widget.index]['mobile'],
-              //   style: new TextStyle(fontSize: 20.0),
-              // ),
-              // new Text(
-              //   widget.list[widget.index]['password'],
+              //   widget.list[widget.index]['age'],
               //   style: new TextStyle(fontSize: 20.0),
               // ),
 
