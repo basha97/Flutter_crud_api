@@ -17,11 +17,11 @@ class Details extends StatefulWidget {
 class _DetailsState extends State<Details> {
 
     void deleteData(){
-      var url="http://<YOUR_IP>/dashboard/Ripozo/deletedata.php";
+      var url="http://192.168.0.110/api/delete_register_data";
 
       http.post(url,
           body:{
-              'name':"NAME"
+              'id':widget.list[widget.index]['id'].toString()
               });
     }
 
@@ -52,7 +52,7 @@ class _DetailsState extends State<Details> {
         ],
       );
       
-      showDialog(context: context, child: alertDialog);
+      showDialog(context: context,child: alertDialog);
     }
 
   @override
