@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_crud/main.dart';
+import 'package:flutter_crud/theme.dart';
 
 class Error extends StatefulWidget {
   @override
@@ -8,12 +10,13 @@ class Error extends StatefulWidget {
 class _ErrorState extends State<Error> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Text("Error Page")
-        ],
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: drawerBackgroundColor,
+        title: Text('Error'),
       ),
+      drawer: NavigateDrawer(),
     );
   }
 }

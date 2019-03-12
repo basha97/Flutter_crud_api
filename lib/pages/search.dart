@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_crud/main.dart';
+import 'package:flutter_crud/theme.dart';
 
 class Search extends StatefulWidget {
   @override
@@ -8,12 +10,13 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Text("Search Page")
-        ],
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: drawerBackgroundColor,
+        title: Text('Search'),
       ),
+      drawer: NavigateDrawer(),
     );
   }
 }

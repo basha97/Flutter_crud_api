@@ -23,8 +23,10 @@ class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
   void _navigationPart(counter){
 	  setState(() {
 		  print(navigationItems[counter].routePage);
+      currentSelectedIndex = counter;
 		//   Navigator.of(context).push(navigationItems[counter].routePage);
 		Navigator.pushNamed(context,navigationItems[counter].routePage );
+    
 	  });
   }
 
@@ -70,13 +72,13 @@ class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
                   itemBuilder: (context, counter) {
                     return CollapsingListTile(
                         onTap: () {
-							_navigationPart(counter);
+						              	_navigationPart(counter);
                         //   routes = navigationItems[counter].routePage;
                         //   print(routes);
                         //   Navigator.of(context).push(routes);
-                          setState(() {
-                            currentSelectedIndex = counter;
-                          });
+                          // setState(() {
+                          //   currentSelectedIndex = counter;
+                          // });
                         },
                         isSelecetd: currentSelectedIndex == counter,
                         title: navigationItems[counter].title,

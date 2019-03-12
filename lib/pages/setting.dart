@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_crud/main.dart';
+import 'package:flutter_crud/theme.dart';
 
 class Setting extends StatefulWidget {
   @override
@@ -8,11 +10,11 @@ class Setting extends StatefulWidget {
 class _SettingState extends State<Setting> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Text("Setting Page")
-        ],
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: drawerBackgroundColor,
+        title: Text('Setting'),
       ),
     );
   }
