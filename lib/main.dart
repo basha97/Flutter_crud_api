@@ -1,15 +1,26 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_crud/pages/search.dart';
+import 'dart:convert';
 import 'package:flutter_crud/sample/CollapsingNavigationDrawer.dart';
 import 'package:flutter_crud/theme.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
 import 'package:flutter_crud/sample/adddata.dart';
 import 'package:flutter_crud/sample/deatils.dart';
+import 'package:flutter_crud/pages/setting.dart';
+import 'package:flutter_crud/pages/error.dart';
+import 'package:flutter_crud/pages/notificationPage.dart';
 
 void main() => runApp(MaterialApp(
       title: "My Store",
-      home: NavigateDrawer(),
+      home: SplashScreen(),
+      routes: <String, WidgetBuilder>{
+        "/crud" : (BuildContext context) => Home(),
+        "/setting" : (BuildContext context) => Setting(),
+        "/search" : (BuildContext context) => Search(),
+        "/notification" : (BuildContext context) => NotificationPage(),
+        "/error" : (BuildContext context) => Error(), 
+      },
       debugShowCheckedModeBanner: false,
     ));
 
@@ -116,7 +127,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
         Duration(seconds: 7),
         () => Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (BuildContext context) => Home())));
+            MaterialPageRoute(builder: (BuildContext context) => NavigateDrawer())));
   }
 
   @override
@@ -212,3 +223,6 @@ class _NavigateDrawerState extends State<NavigateDrawer> {
 	);
   }
 }
+
+
+

@@ -4,11 +4,12 @@ import 'package:flutter_crud/theme.dart';
 class CollapsingListTile extends StatefulWidget {
   final String title;
   final IconData icon;
+  final String routePage;
   final AnimationController animationController;
   final bool isSelecetd;
   final Function onTap;
 
-  CollapsingListTile({@required this.title,@required this.icon, @required this.animationController,this.isSelecetd = false,this.onTap});
+  CollapsingListTile({@required this.title,@required this.icon, @required this.animationController,this.isSelecetd = false,this.onTap,this.routePage});
   _CollapsingListTileState createState() => _CollapsingListTileState();
 }
 
@@ -28,7 +29,7 @@ class _CollapsingListTileState extends State<CollapsingListTile> {
           onTap: widget.onTap ,
           child: Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(16.0)),
+              borderRadius: BorderRadius.all(Radius.circular(14.0)),
               color: widget.isSelecetd ? Colors.transparent.withOpacity(0.3) : Colors.transparent 
             ),
             width: _widthAnimation.value,
@@ -36,7 +37,7 @@ class _CollapsingListTileState extends State<CollapsingListTile> {
             padding: EdgeInsets.symmetric(horizontal: 8.0,vertical: 8.0),
             child: Row(
               children: <Widget>[
-                Icon(widget.icon, color: widget.isSelecetd ? selectedColor :  Colors.white, size: 38.0,),
+                Icon(widget.icon, color: widget.isSelecetd ? selectedColor :  Colors.white, size: 25.0,),
                 SizedBox(width: sizedBoxAnimation.value),
                 (_widthAnimation.value >= 220) ? Text(
                   widget.title,
