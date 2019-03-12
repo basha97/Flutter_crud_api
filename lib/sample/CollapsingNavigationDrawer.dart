@@ -9,11 +9,12 @@ class CollapsingNavigationDrawer extends StatefulWidget {
 }
 
 class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer> with SingleTickerProviderStateMixin {
-	double maxwidth = 250;
-	double minwidth = 60;
+	double maxwidth = 230;
+	double minwidth = 65;
 	bool isCollapsed = false ;
 	AnimationController _animationController;
 	Animation<double> _widthAnimation;
+  int currentSelectedIndex = 0 ;
 
 	@override
 	void initState() {
@@ -31,49 +32,59 @@ class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
 	}
 
 	Widget getWidget(context , widget){
-		return Container(
-			width: _widthAnimation.value,
-			color: drawerBackgroundColor,
-			child: Column(
-				children: <Widget>[
-					
-					CollapsingListTile(
-						title: "Basha",
-						icon: Icons.person,
-						animationController: _animationController,
-					),
-					Expanded(
-						child: ListView.separated(
-						separatorBuilder: (context , counter){
-							return Divider(color: Colors.grey,height: 40.0);
-						},
-						itemCount: navigationItems.length,
-						itemBuilder: (context , counter )
-							{
-								return CollapsingListTile(
-									title: navigationItems[counter].title,
-									icon: navigationItems[counter].icon,
-									animationController: _animationController
-								);
-							}
-						),
-					),
-					 InkWell(
-						 	onTap: () {
-								 setState(() {
-									 isCollapsed = !isCollapsed;
-									 isCollapsed ? _animationController.forward() : _animationController.reverse();
-								 });
-							 },
-							child: AnimatedIcon(
-								icon:AnimatedIcons.close_menu,
-								color: Colors.white,
-								size: 50.0,
-								progress: _animationController)
-						),
-					 SizedBox(height: 50.0),
-				],
-			),
+		return Material(
+          elevation: 8.0 ,
+          child: Container(
+          width: _widthAnimation.value,
+          color: drawerBackgroundColor,
+          child: Column(
+		  		children: <Widget>[
+		  			
+		  			CollapsingListTile(
+		  				title: "Basha",
+		  				icon: Icons.person,
+		  				animationController: _animationController,
+		  			),
+          Divider(color: Colors.grey,height: 40.0,),
+		  			Expanded(
+		  				child: ListView.separated(
+		  				separatorBuilder: (context , counter){
+		  					return Divider(height: 12.0);
+		  				},
+		  				itemCount: navigationItems.length,
+		  				itemBuilder: (context , counter )
+		  					{
+		  						return CollapsingListTile(
+                  onTap: (){
+                    setState(() {
+                     currentSelectedIndex = counter; 
+                    });
+                  },
+                  isSelecetd : currentSelectedIndex ==counter,
+		  							title: navigationItems[counter].title,
+		  							icon: navigationItems[counter].icon,
+		  							animationController: _animationController
+		  						);
+		  					}
+		  				),
+		  			),
+		  			 InkWell(
+		  				 	onTap: () {
+		  						 setState(() {
+		  							 isCollapsed = !isCollapsed;
+		  							 isCollapsed ? _animationController.forward() : _animationController.reverse();
+		  						 });
+		  					 },
+		  					child: AnimatedIcon(
+		  						icon:AnimatedIcons.close_menu,
+		  						color: Colors.white,
+		  						size: 50.0,
+		  						progress: _animationController)
+		  				),
+		  			 SizedBox(height: 50.0),
+		  		],
+		  	),
+		  ),
 		);
 	}
 }
