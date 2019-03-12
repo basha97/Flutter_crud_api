@@ -32,7 +32,7 @@ class _DetailsState extends State<Details> {
 							widget.list[widget.index]['body'],
 						),
 						MaterialButton(
-							child: Text("Editdsjbfsdh"),
+							child: Text("Edit"),
 							color: Colors.deepOrangeAccent,
 							onPressed: (){},
 						),

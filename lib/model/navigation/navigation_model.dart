@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_crud/main.dart';
+import 'package:flutter_crud/pages/home.dart';
 import 'package:flutter_crud/pages/notificationPage.dart';
 import 'package:flutter_crud/pages/search.dart';
 import 'package:flutter_crud/pages/setting.dart';

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_crud/model/navigation_model.dart';
-import 'package:flutter_crud/sample/collapsing_list_tile.dart';
-import 'package:flutter_crud/theme.dart';
-import 'package:flutter_crud/main.dart';
+import 'package:flutter_crud/model/navigation/navigation_model.dart';
+import 'package:flutter_crud/widgets/drawer/collapsing_list_tile.dart';
+import 'package:flutter_crud/widgets/theme/theme.dart';
 
 class CollapsingNavigationDrawer extends StatefulWidget {
   @override

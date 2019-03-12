@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_crud/sample/editdata.dart';
-import 'package:flutter_crud/main.dart';
+import 'package:flutter_crud/pages/home.dart';
+import 'package:flutter_crud/pages/crud/editdata.dart';
 import 'package:http/http.dart' as http;
 
 
@@ -35,7 +35,7 @@ class _DetailsState extends State<Details> {
               deleteData();
               Navigator.of(context).push(
                 new MaterialPageRoute(
-                    builder: (BuildContext context)=>new Home(),
+                    builder: (BuildContext context)=> Home(),
                 )
               );
             },
