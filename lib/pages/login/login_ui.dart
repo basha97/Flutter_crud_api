@@ -17,30 +17,30 @@ class _LoginuiState extends State<Loginui> {
 	static TextEditingController _username = TextEditingController();
 	static TextEditingController _password = TextEditingController();
 
-	Future<Map> LoginFunc() async {
-		print(_username.text+':'+_password.text);
-		Map data = {
-			"username" :_username.text,
-			"password" :_password.text
-		};
-		
-		await http.post(ApiUrl+'/login',body: data).then((response){
-			var value = json.decode(response.body);
-			print(value);
-			if (value['status'] == true) {
-				var token = value['token'];
-				var name = value['data']['username'];
-				Navigator.pushReplacement(
-					context,
-					MaterialPageRoute(
-						builder: (context) => SplashScreen()
-					)
-				);
-			}else
-			{
-				return invalid_credential_msg();
-			}
-		});
+	  Future<Map> LoginFunc() async {
+      print(_username.text+':'+_password.text);
+      Map data = {
+        "username" :_username.text,
+        "password" :_password.text
+      };
+      
+      await http.post(apiUrl+'/login',body: data).then((response){
+        var value = json.decode(response.body);
+        print(value);
+        if (value['status'] == true) {
+          var token = value['token'];
+          var name = value['data']['username'];
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => SplashScreen()
+            )
+          );
+        }else
+        {
+          return invalid_credential_msg();
+        }
+      });
 		
 	}
 
