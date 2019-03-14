@@ -21,7 +21,8 @@ class _AddDataState extends State<AddData> {
 
 	var url="http://192.168.0.110/api/saveData";
 
-	final dynamic res = http.post(
+	// final dynamic res = 
+  return http.post(
 						url,
 						body: {
 							"age":cage.text,
