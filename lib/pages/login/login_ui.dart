@@ -46,92 +46,111 @@ class _LoginuiState extends State<Loginui> {
 
 	@override
 	Widget build(BuildContext context) {
-		return Scaffold(
-		body: 	Container(
-					margin: EdgeInsets.symmetric(horizontal: 20.0),
-					child: Column(
-						mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-						children: <Widget>[
-							Column(
-								mainAxisAlignment: MainAxisAlignment.spaceAround,
-								children: <Widget>[
-									Container(
-										decoration: BoxDecoration(
-											border: Border(
-												bottom: BorderSide(
-													width: 0.5,
-													color: Colors.redAccent
-												)
-											)
-										),
-										child: TextField(
-											controller: _username,
-											style: TextStyle(
-												color: Colors.black
-											),
-											decoration: InputDecoration(
-												icon: Icon(
-													Icons.person_outline,
-													color: Colors.black,
-												),
-												border: InputBorder.none,
-												hintText: "Username",
-												hintStyle: TextStyle(
-													color: Colors.black,
-													fontSize: 15.0
-												),
-												contentPadding: EdgeInsets.only(
-													top: 30.0,
-													right: 30.0,
-													bottom: 30.0,
-													left: 5.0
-												)
-											),
-										),
-									),
-									Container(
-										child: TextField(
-												controller: _password,
-												obscureText: true,
-												style: TextStyle(
-													color: Colors.black
-												),
-												decoration: InputDecoration(
-													icon: Icon(
-														Icons.lock,
-														color: Colors.black,
-													),
-													border: InputBorder.none,
-													hintText: "Password",
-													hintStyle: TextStyle(
-														color: Colors.black,
-														fontSize: 15.0
-													),
-													contentPadding: EdgeInsets.only(
-														top: 30.0,
-														right: 30.0,
-														bottom: 30.0,
-														left: 5.0
-													)
-												),
-										),
-									),
-									Container(
-										child: RaisedButton(
-											onPressed: () => LoginFunc(),
+	return Scaffold(
+    appBar: AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0.0,
+      iconTheme: IconThemeData(color : Color(0xFF18D191)),
+    ),
+    body: Container(
+      width: double.infinity,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 0.0),
+            child: TextField(
+              controller: _username,
+              decoration: InputDecoration(
+                labelText: "Username"
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 15.0,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 0.0),
+            child: TextField(
+              controller: _password,
+              obscureText: true,
+              decoration: InputDecoration(
+                labelText: "Password",
+              ),
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    left: 20.0,right: 5.0,top: 10.0
+                  ),
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 60.0,
+                    decoration: BoxDecoration(
+                      color : Color(0xFF18D191),
+                      borderRadius: BorderRadius.circular(9.0),
+                    ),
+                    // child: Text("Sigin",
+                    // style: TextStyle(
+                    //   fontSize: 20.0,
+                    //   color : Color(0xFF18D191)
+                    // ),),
+                    child: RaisedButton(
+                      onPressed: () => LoginFunc(),
 											textColor: Colors.redAccent,
-											child: Text("SignIn"),
-										),
-									)
-								]
-							)
-					],
-				),
-			),
-		);
-	}
+											child: Text("SignIn",
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color : Color(0xFF18D191)
+                      ),),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    left: 20.0,right: 5.0,top: 10.0
+                  ),
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 60.0,
+                    child: Text("Forgor Password",
+                    style: TextStyle(
+                      fontSize: 17.0,
+                      color: Colors.white
+                    ),
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.only(bottom: 18.0),
+                  child: Text("Create a new account",style: TextStyle(
+                    fontSize: 17.0,
+                    color : Color(0xFF18D191),
+                    fontWeight: FontWeight.bold
+                  ),),
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    ),
+  );
 }
 
 
-
+}
  

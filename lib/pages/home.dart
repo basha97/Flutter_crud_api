@@ -5,8 +5,6 @@ import 'package:flutter_crud/pages/crud/adddata.dart';
 import 'package:flutter_crud/pages/crud/deatils.dart';
 import 'package:flutter_crud/widgets/loader/loader.dart';
 
-
-
 class Home extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -31,7 +29,6 @@ class HomeState extends State<Home> {
           title: Text("Cloudelabs"),
           backgroundColor: Colors.redAccent,
         ),
-		
         floatingActionButton: FloatingActionButton(
           onPressed: () => Navigator.of(context).push(
                 MaterialPageRoute(

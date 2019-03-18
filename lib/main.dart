@@ -5,7 +5,6 @@ import 'package:flutter_crud/pages/search.dart';
 import 'package:flutter_crud/pages/setting.dart';
 import 'package:flutter_crud/pages/error.dart';
 import 'package:flutter_crud/pages/notificationPage.dart';
-import 'package:flutter_crud/widgets/splashscreen/splashscreen.dart';
 
 
 void main() => runApp(MaterialApp(
