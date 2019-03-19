@@ -1,2 +1,2 @@
 
-String  apiUrl = "http://192.168.0.110/api";
+String  apiUrl = "http://cxo.instrasol.net/api";
