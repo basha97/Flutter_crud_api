@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_crud/pages/login/login_ui.dart';
+import 'package:flutter_crud/pages/welcomepage.dart';
 import 'package:flutter_crud/widgets/drawer/naviationdrawer.dart';
 import 'package:flutter_crud/widgets/loader/colorLoader5.dart';
 
@@ -16,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
         Duration(seconds: 4),
         () => Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (BuildContext context) => Loginui())));
+            MaterialPageRoute(builder: (BuildContext context) => WelcomePage())));
   }
 
   @override

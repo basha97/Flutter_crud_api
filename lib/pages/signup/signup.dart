@@ -88,6 +88,15 @@ class _SignUpState extends State<SignUp> {
                 decoration: new InputDecoration(labelText: 'Password'),
               ),
             ),
+            Padding(
+              padding:
+              const EdgeInsets.symmetric(horizontal: 15.0, vertical: 0.0),
+              child: new TextField(
+                obscureText: true,
+                controller: _password,
+                decoration: new InputDecoration(labelText: 'Name'),
+              ),
+            ),
             new Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -116,9 +125,9 @@ class _SignUpState extends State<SignUp> {
                     child: new Container(
                         alignment: Alignment.center,
                         height: 60.0,
-                        child: new Text("Forgot Password?",
+                        child: new Text("SignIn",
                             style: new TextStyle(
-                                fontSize: 17.0, color: Color(0xFF18D191)))),
+                                fontSize: 25.0, color: Color(0xFF18D191)))),
                   ),
                 )
               ],
