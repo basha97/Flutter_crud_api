@@ -7,30 +7,61 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter_crud/pages/signup/signup.dart';
+import 'package:flutter_crud/model/user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 
 class Loginui extends StatefulWidget {
-	const Loginui({Key key}) : super(key:key);
+
 	@override
 	_LoginuiState createState() => _LoginuiState();
 }
 
 class _LoginuiState extends State<Loginui> {
+
+  void autoAuthenticate () async{
+    final SharedPreferences prefs = await  SharedPreferences.getInstance();
+    final String token = prefs.getString('token');
+    if(token != null){
+      final String name = prefs.getString('name');
+      final String email = prefs.getString('email');
+      final int id = prefs.getInt('id');
+      final int User_id = prefs.getInt('user_id');
+      _authUser = User(id: id, email: email, token: token,name: name);
+    }
+  }
+
+  void logout() async{
+    _authUser = null;
+    final SharedPreferences prefs = await  SharedPreferences.getInstance();
+    prefs.clear();
+  }
+
 	static TextEditingController _username = TextEditingController();
 	static TextEditingController _password = TextEditingController();
-
-	  Future<Map> LoginFunc() async {
+  User _authUser;
+	  Future <Map<String, dynamic>> LoginFunc() async {
       print(_username.text+':'+_password.text);
-      Map data = {
+     final Map<String, dynamic> data = {
         "email" :_username.text,
         "password" :_password.text
       };
-      
-      await http.post(apiUrl+'/login',body: data).then((response){
+      http.Response response;
+      response = await http.post(apiUrl+'/login',body: data).then((response) async {
         var value = json.decode(response.body);
         print(value);
         if (value['success'] == true) {
+          _authUser = User(id: value['id'],email: _username.text,token: value['token']);
+          print(_authUser.token);
+         final SharedPreferences prefs = await  SharedPreferences.getInstance();
+         prefs.setString('token', value['token']);
+         prefs.setString('email', value['email']);
+         prefs.setString('name', value['full_name']);
+         prefs.setInt('user_id', value['user_id']);
+         prefs.setInt('id', value['id']);
+         prefs.setString('status', value['status']);
+         prefs.setString('type', value['type']);
           var token = value['token'];
           var name = value['data']['username'];
           Navigator.pushReplacement(
@@ -62,12 +93,21 @@ class _LoginuiState extends State<Loginui> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           StakedIcons(),
+          SizedBox(
+            height: 25.0,
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 0.0),
+//          padding: EdgeInsets.all(10.0),
             child: TextField(
+
               controller: _username,
               decoration: InputDecoration(
-                labelText: "Username"
+                labelText: "Username",
+                border: OutlineInputBorder(
+                  gapPadding: 3.3,
+                  borderRadius: BorderRadius.circular(6.6)
+                )
               ),
             ),
           ),
@@ -75,12 +115,17 @@ class _LoginuiState extends State<Loginui> {
             height: 15.0,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 0.0),
+           padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 0.0),
+//          padding: EdgeInsets.all(10.0),
             child: TextField(
               controller: _password,
               obscureText: true,
               decoration: InputDecoration(
                 labelText: "Password",
+                  border: OutlineInputBorder(
+                      gapPadding: 3.3,
+                      borderRadius: BorderRadius.circular(6.6)
+                  )
               ),
             ),
           ),
@@ -168,5 +213,11 @@ class _LoginuiState extends State<Loginui> {
 }
 
 
+
+
 }
+
+
+
+
  

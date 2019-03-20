@@ -4,6 +4,7 @@ import 'package:flutter_crud/pages/notificationPage.dart';
 import 'package:flutter_crud/pages/search.dart';
 import 'package:flutter_crud/pages/setting.dart';
 import 'package:flutter_crud/pages/error.dart';
+import 'package:flutter_crud/pages/login/login_ui.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -13,7 +14,7 @@ void main() {
         "/setting" : (context) => Setting(),
         "/search" : (context) => Search(),
         "/notification" : (context) => NotificationPage(),
-        "/error" : (context) => Error(), 
+        "/error" : (context) => Error(),
       },
   ));
 }
