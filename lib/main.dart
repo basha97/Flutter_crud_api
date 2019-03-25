@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:flutter_crud/pages/home.dart';
+import 'package:flutter_crud/pages/login/login_ui.dart';
 import 'package:flutter_crud/pages/search.dart';
 import 'package:flutter_crud/pages/setting.dart';
 import 'package:flutter_crud/pages/error.dart';
@@ -15,7 +16,7 @@ void main() => runApp(MaterialApp(
         "/setting" : (BuildContext context) => Setting(),
         "/search" : (BuildContext context) => Search(),
         "/notification" : (BuildContext context) => NotificationPage(),
-        "/error" : (BuildContext context) => Error(), 
+        "/error" : (BuildContext context) => Error(),
       },
       debugShowCheckedModeBanner: false,
     ));

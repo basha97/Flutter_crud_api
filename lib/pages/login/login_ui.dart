@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_crud/config/network.dart';
 import 'package:flutter_crud/pages/stackedicon/stakedicons.dart';
+import 'package:flutter_crud/pages/welcomepage.dart';
 import 'package:flutter_crud/widgets/drawer/naviationdrawer.dart';
 import 'package:flutter_crud/widgets/toast/toast.dart';
 import 'package:http/http.dart' as http;
@@ -12,6 +13,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 
+
+
 class Loginui extends StatefulWidget {
 
 	@override
@@ -19,51 +22,50 @@ class Loginui extends StatefulWidget {
 }
 
 class _LoginuiState extends State<Loginui> {
-
-  void autoAuthenticate () async{
-    final SharedPreferences prefs = await  SharedPreferences.getInstance();
-    final String token = prefs.getString('token');
-    if(token != null){
-      final String name = prefs.getString('name');
-      final String email = prefs.getString('email');
-      final int id = prefs.getInt('id');
-      final int User_id = prefs.getInt('user_id');
-      _authUser = User(id: id, email: email, token: token,name: name);
-    }
-  }
+//  void autoAuthenticate () async{
+//    final SharedPreferences prefs = await  SharedPreferences.getInstance();
+//    final String token = prefs.getString('token');
+//    if(token != null){
+//      final String name = prefs.getString('name');
+//      final String email = prefs.getString('email');
+//      final int id = prefs.getInt('id');
+//      final int User_id = prefs.getInt('user_id');
+//      _authUser = User(id: id, email: email, token: token,name: name);
+//    }
+//  }
 
   void logout() async{
-    _authUser = null;
     final SharedPreferences prefs = await  SharedPreferences.getInstance();
     prefs.clear();
   }
 
 	static TextEditingController _username = TextEditingController();
 	static TextEditingController _password = TextEditingController();
-  User _authUser;
+
 	  Future <Map<String, dynamic>> LoginFunc() async {
-      print(_username.text+':'+_password.text);
+	    print(_username.text+':'+_password.text);
      final Map<String, dynamic> data = {
         "email" :_username.text,
         "password" :_password.text
       };
       http.Response response;
+
       response = await http.post(apiUrl+'/login',body: data).then((response) async {
         var value = json.decode(response.body);
         print(value);
         if (value['success'] == true) {
-          _authUser = User(id: value['id'],email: _username.text,token: value['token']);
-          print(_authUser.token);
-         final SharedPreferences prefs = await  SharedPreferences.getInstance();
-         prefs.setString('token', value['token']);
-         prefs.setString('email', value['email']);
-         prefs.setString('name', value['full_name']);
-         prefs.setInt('user_id', value['user_id']);
-         prefs.setInt('id', value['id']);
-         prefs.setString('status', value['status']);
-         prefs.setString('type', value['type']);
-          var token = value['token'];
-          var name = value['data']['username'];
+          var user = new User.fromJson(value);
+          saveCurrentLogin(value);
+//         final SharedPreferences prefs = await  SharedPreferences.getInstance();
+//         prefs.setString('token', value['token']);
+//         prefs.setString('email', value['email']);
+//         prefs.setString('name', value['full_name']);
+//         prefs.setInt('user_id', value['user_id']);
+//         prefs.setInt('id', value['id']);
+//         prefs.setString('status', value['status']);
+//         prefs.setString('type', value['type']);
+//          var token = value['token'];
+//          var name = value['data']['username'];
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
@@ -72,10 +74,14 @@ class _LoginuiState extends State<Loginui> {
           );
         }else
         {
+          final value = json.decode(response.body);
+          saveCurrentLogin(value);
           return invalid_credential_msg();
+          return null;
         }
       });
-		
+
+
 	}
 
 	@override
@@ -212,10 +218,55 @@ class _LoginuiState extends State<Loginui> {
   );
 }
 
-
-
-
 }
+
+saveCurrentLogin(Map value) async{
+  SharedPreferences pref = await SharedPreferences.getInstance();
+  var name = (value != null && !value.isEmpty) ? User.fromJson(value).name : "";
+  var token = (value != null && !value.isEmpty) ? User.fromJson(value).token : "";
+  var email = (value != null && !value.isEmpty) ? User.fromJson(value).email : "";
+  var id = (value != null && !value.isEmpty) ? User.fromJson(value).id : "";
+}
+
+getToken() async{
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String getToken = await prefs.getString("LastToken");
+  return getToken;
+}
+
+saveLogout() async{
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString('LastUser', "");
+  await prefs.setString('LastToken', "");
+  await prefs.setString('LastEmail', "");
+  await prefs.setInt('LastUserId', 0);
+}
+
+Future<User> LogOutFunc(BuildContext context) async{
+  var token;
+  await getToken().then((result){
+    token = result;
+  });
+  final response = await http.post(
+      apiUrl+"/logout",
+//      headers: {HttpHeaders.authorizationHeader: "Token $token"},
+  headers: {
+        "Authorization" : "Bearer $token"
+  },
+
+  );
+  print(response.body);
+  print(response.statusCode);
+  print(response.headers);
+  if(response.statusCode == 200 ){
+    saveLogout();
+    return null;
+  }else{
+    saveLogout();
+    return null;
+  }
+}
+
 
 
 

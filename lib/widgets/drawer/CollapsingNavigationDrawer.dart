@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_crud/model/navigation/navigation_model.dart';
+import 'package:flutter_crud/pages/login/login_ui.dart';
 import 'package:flutter_crud/widgets/drawer/collapsing_list_tile.dart';
 import 'package:flutter_crud/widgets/theme/theme.dart';
+import 'package:flutter_crud/pages/welcomepage.dart';
 
 class CollapsingNavigationDrawer extends StatefulWidget {
   @override
@@ -60,7 +62,7 @@ class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
             ),
             Divider(
               color: Colors.grey,
-              height: 40.0,
+              height: 5.0,
             ),
             Expanded(
               child: ListView.separated(
@@ -84,6 +86,16 @@ class _CollapsingNavigationDrawerState extends State<CollapsingNavigationDrawer>
                         icon: navigationItems[counter].icon,
                         animationController: _animationController);
                   }),
+            ),
+            Divider(
+              color: Colors.grey,
+              height: 40.0,
+            ),
+            CollapsingListTile(
+              title: "Logout",
+              icon: Icons.restore_from_trash,
+              animationController: _animationController,
+              onTap: () =>  LogOutFunc(context),
             ),
             InkWell(
                 onTap: () {
